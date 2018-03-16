@@ -1,29 +1,38 @@
 import type { QuestionsList, TrackId, Milestone } from '../constants'
 import QuestionLine from './QuestionLine'
-import BreakLine from './BreakLine'
 import RadioInputLine from './RadioInputLine'
 
 type Props = {
   questions: QuestionsList,
   trackIndex: Number,
   trackId: String,
-  handleTrackMilestoneChangeFn: (TrackId, Milestone) => void
+  handleMileStoneChangeFn: (TrackId, Milestone) => void
 }
 
-function TrackQuestions({questions, trackIndex, trackId, handleTrackMilestoneChangeFn}) {
+function QuestionGroup({questions, trackIndex, trackId, handleMileStoneChangeFn}) {
+
+  const answerOptions = ['rarely', 'sometimes', 'usually'];
+
   return (
     <div
       key={trackIndex}
-      className='quiz-questions'
       style={{
         display:'grid',
-        gridTemplateColumns: '35% 5% 20% 20% 20%',
+        gridTemplateColumns: '40% 20% 20% 20%',
         paddingBottom: '10px',
         marginBottom: '40px',
         borderBottom: '2px solid #ccc'
       }}>
 
-      <div className='box'></div>
+      <style jsx>{`
+        .answer-option {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 1em;
+        }
+      `}</style>
+
       <div className='box'></div>
       <div className='box answer-option'><p>rarely</p></div>
       <div className='box answer-option'><p>sometimes</p></div>
@@ -32,7 +41,6 @@ function TrackQuestions({questions, trackIndex, trackId, handleTrackMilestoneCha
         return (
           // THIS .map() CALL ON A FAKE ARRAY IS SUPER HACKY TOO... ANY THOUGHTS ON HOW TO MAKE THIS SITUATION BETTER?
           ['questionLine',
-            'BreakLine',
             'RadioInputLine',
             'RadioInputLine',
             'RadioInputLine'].map((section, lineIndex) => {
@@ -43,11 +51,6 @@ function TrackQuestions({questions, trackIndex, trackId, handleTrackMilestoneCha
                   lineIndex={lineIndex}
                   question={question}/>
               )
-            } else if (lineIndex === 1) {
-              return (
-                <BreakLine
-                  key={lineIndex}/>
-              )
             } else {
               return (
                 <RadioInputLine
@@ -56,7 +59,7 @@ function TrackQuestions({questions, trackIndex, trackId, handleTrackMilestoneCha
                   lineIndex={lineIndex}
                   trackIndex={trackIndex}
                   questionIndex={questionIndex}
-                  handleTrackMilestoneChangeFn={handleTrackMilestoneChangeFn}/>
+                  handleMileStoneChangeFn={handleMileStoneChangeFn}/>
               )
             }
           })
@@ -67,4 +70,4 @@ function TrackQuestions({questions, trackIndex, trackId, handleTrackMilestoneCha
   )
 }
 
-export default TrackQuestions
+export default QuestionGroup
