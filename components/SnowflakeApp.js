@@ -9,11 +9,7 @@ import { eligibleTitles, trackIds } from '../constants'
 import type { Milestone, MilestoneMap, TrackId, QuizResults } from '../constants'
 import React from 'react'
 import Link from 'next/link'
-import html2canvas from 'html2canvas'
-import addImage from './addimage'
-import jsPDF from './jspdf'
-import zlib from './zlib'
-// import PNG from './png'
+// import jsPDF from './../jspdf/jspdf'
 
 
 type SnowflakeAppState = {
@@ -98,14 +94,10 @@ class SnowflakeApp extends React.Component<Props, SnowflakeAppState> {
             padding-bottom: 5px;
           }
         `}</style>
-        <h1
-          onClick={() => {
-            this.print()
-          }}
-          >test</h1>
         <Header
           menuOpen={this.state.menuOpen}
-          hamburgerClick={this.handleHamburgerMenuClick.bind(this)}/>
+          hamburgerClick={this.handleHamburgerMenuClick.bind(this)}
+          print={this.print.bind(this)}/>
         <div style={{display: 'flex',
           borderBottom: '2px solid #ccc',
           paddingBottom: '20px'
@@ -184,18 +176,34 @@ class SnowflakeApp extends React.Component<Props, SnowflakeAppState> {
   }
 
   print() {
-    const thing = document.getElementById('to-print');
-    html2canvas(thing)
+
+
+    const source = window.document.getElementById('to-print')
+
+    // const pdf = new jsPDF()
+//     console.log(source);
+//
+//     pdf.fromHTML(
+//     source,
+//     10,
+//     10,
+//     {
+//       'width': 180
+//     });
+//
+// pdf.output("dataurlnewwindow");
+
+    html2canvas(source)
       .then((canvas) => {
+        console.log(canvas);
         const imgData = canvas.toDataURL('image/png');
         const pdf = new jsPDF();
-        console.log(pdf);
         pdf.addImage(imgData, 'JPEG', 0, 0);
         // pdf.output('dataurlnewwindow');
         pdf.save("download.pdf");
-      })
-    ;
-  }
+      });
+
+    }
 
 }
 

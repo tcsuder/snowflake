@@ -88,7 +88,11 @@ function Header(props: Props) {
 					marginLeft:'-40px'}}>
 
 					<Link Link href={{ pathname: '/quiz' }}><li className='navOption'>Take Quiz</li></Link>
-					<li className='navOption'>Print Results</li>
+					<li
+						className='navOption'
+						onClick={() => {
+							props.print()
+						}}>Print Results</li>
 				</div>
 			</ul>
       <div className='titleContainer' style={styles.titleContainer}>
@@ -104,6 +108,7 @@ function Header(props: Props) {
 			}
     </div>
 	);
+	// TODO: remove props. from all files
 };
 
 export default Header;

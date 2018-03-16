@@ -1,4 +1,4 @@
-import fileSaver from 'file-saver'
+import fromHTML from './from_html'
 
 /** @preserve
  * jsPDF - PDF Document creation from JavaScript
@@ -961,7 +961,7 @@ var jsPDF = (function (global) {
                                 return API.output('dataurlnewwindow');
                             }
                         }
-                        fileSaver.saveAs(getBlob(), options);
+                        saveAs(getBlob(), options);
                         if (typeof saveAs.unload === 'function') {
                             if (global.setTimeout) {
                                 setTimeout(saveAs.unload, 911);
