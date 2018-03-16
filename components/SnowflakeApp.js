@@ -9,6 +9,12 @@ import { eligibleTitles, trackIds } from '../constants'
 import type { Milestone, MilestoneMap, TrackId, QuizResults } from '../constants'
 import React from 'react'
 import Link from 'next/link'
+import html2canvas from 'html2canvas'
+import addImage from './addimage'
+import jsPDF from './jspdf'
+import zlib from './zlib'
+// import PNG from './png'
+
 
 type SnowflakeAppState = {
   milestoneByTrack: MilestoneMap,
@@ -58,7 +64,7 @@ class SnowflakeApp extends React.Component<Props, SnowflakeAppState> {
 
   render() {
     return (
-      <main>
+      <main id='to-print'>
         <style jsx global>{`
           body {
             font-family: Helvetica;
@@ -92,6 +98,11 @@ class SnowflakeApp extends React.Component<Props, SnowflakeAppState> {
             padding-bottom: 5px;
           }
         `}</style>
+        <h1
+          onClick={() => {
+            this.print()
+          }}
+          >test</h1>
         <Header
           menuOpen={this.state.menuOpen}
           hamburgerClick={this.handleHamburgerMenuClick.bind(this)}/>
@@ -171,6 +182,21 @@ class SnowflakeApp extends React.Component<Props, SnowflakeAppState> {
     if (milestone > 5) milestone = 5
     this.handleTrackMilestoneChange(this.state.focusedTrackId, milestone)
   }
+
+  print() {
+    const thing = document.getElementById('to-print');
+    html2canvas(thing)
+      .then((canvas) => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF();
+        console.log(pdf);
+        pdf.addImage(imgData, 'JPEG', 0, 0);
+        // pdf.output('dataurlnewwindow');
+        pdf.save("download.pdf");
+      })
+    ;
+  }
+
 }
 
 export default SnowflakeApp
