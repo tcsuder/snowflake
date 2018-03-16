@@ -15,7 +15,8 @@ class TrackDetail extends React.Component<Props> {
   render() {
     const track = tracks[this.props.trackId]
     const currentMilestoneId = this.props.milestoneByTrack[this.props.trackId]
-    const currentMilestone = track.milestones[currentMilestoneId - 1]
+    // TODO: This is just a long line of values that are trying to make these milestone numbes not suck. hacky... fix
+    const currentMilestone = track.milestones[Math.floor(currentMilestoneId / 2)]
     return (
       <div className="track">
         <style jsx>{`

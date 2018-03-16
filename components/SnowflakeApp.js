@@ -32,21 +32,6 @@ const quizResultToState = (props: QuizResults): ?SnowflakeAppState => {
   return result
 }
 
-const emptyState = (): SnowflakeAppState => {
-  return {
-    name: '',
-    milestoneByTrack: {
-      'SELF': undefined,
-      'TEAM': undefined,
-      'PEERS': undefined,
-      'SUPERIORS': undefined,
-      'BUSINESS': undefined,
-      'WORK/LIFE': undefined
-    },
-    focusedTrackId: 'SELF'
-  }
-}
-
 const defaultState = (): SnowflakeAppState => {
   return {
     name: 'Results Not Found',
