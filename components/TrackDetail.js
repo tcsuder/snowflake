@@ -39,6 +39,7 @@ class TrackDetail extends React.Component<Props> {
           td {
             line-height: 50px;
             width: 50px;
+            min-width: 50px;
             text-align: center;
             background: #eee;
             font-weight: bold;
@@ -59,7 +60,7 @@ class TrackDetail extends React.Component<Props> {
                 const isMet = milestone <= currentMilestoneId
                 return (
                   <tr key={milestone}>
-                    <td onClick={() => this.props.handleTrackMilestoneChangeFn(this.props.trackId, milestone)}
+                    <td className="no-really" onClick={() => this.props.handleTrackMilestoneChangeFn(this.props.trackId, milestone)}
                         style={{border: `4px solid ${milestone === currentMilestoneId ? '#000' : isMet ? categoryColorScale(track.category) : '#eee'}`, background: isMet ? categoryColorScale(track.category) : undefined}}>
                       {milestone}
                     </td>
