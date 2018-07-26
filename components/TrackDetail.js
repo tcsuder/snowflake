@@ -51,41 +51,30 @@ class TrackDetail extends React.Component<Props> {
             line-height: 1.5em;
           }
         `}</style>
-        <h2>{track.shortDisplayName}</h2>
+        <h3 style={{margin: '0', padding: '15px', paddingLeft:'0', fontSize: '2rem'}}>{track.longDisplayName}</h3>
         <p className="track-description">{track.description}</p>
         <div style={{display: 'flex'}}>
-          <table style={{flex: 0, marginRight: 50}}>
-            <tbody>
-              {milestones.slice(1).reverse().map((milestone) => {
-                const isMet = milestone <= currentMilestoneId
-                return (
-                  <tr key={milestone}>
-                    <td className="no-really" onClick={() => this.props.handleTrackMilestoneChangeFn(this.props.trackId, milestone)}
-                        style={{border: `4px solid ${milestone === currentMilestoneId ? '#000' : isMet ? categoryColorScale(track.category) : '#eee'}`, background: isMet ? categoryColorScale(track.category) : undefined}}>
-                      {milestone}
-                    </td>
-                  </tr>
-                )
-              })}
-            </tbody>
-          </table>
-          {currentMilestone ? (
-            <div style={{flex: 1}}>
-              <h3>{currentMilestone.summary}</h3>
-              <h4>Example behaviors:</h4>
-              <ul>
-                {currentMilestone.signals.map((signal, i) => (
-                  <li key={i}>{signal}</li>
-                ))}
-              </ul>
-              <h4>Example tasks:</h4>
-              <ul>
-                {currentMilestone.examples.map((example, i) => (
-                  <li key={i}>{example}</li>
-                ))}
-              </ul>
-            </div>
-          ) : null}
+          <div style={{flex: 1}}>
+            <h3>Want to improve in this area? Check out these great resources:</h3>
+            <h4>Articles:</h4>
+            <ul>
+              {currentMilestone.articles.map((signal, i) => (
+                <li key={i}>{signal}</li>
+              ))}
+            </ul>
+            <h4>Books:</h4>
+            <ul>
+              {currentMilestone.books.map((example, i) => (
+                <li key={i}>{example}</li>
+              ))}
+            </ul>
+            <h4>Videos:</h4>
+            <ul>
+              {currentMilestone.videos.map((signal, i) => (
+                <li key={i}>{signal}</li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     )
