@@ -11,6 +11,10 @@ type CompanionQuizState = {
   name: string
 }
 
+type props = {
+  pathname: string
+}
+
 const stateToPath = (state: CompanionQuizState) => {
   if (!state || !state.milestoneByTrack) return null
   const values = trackIds.map((trackId) => {
@@ -23,6 +27,7 @@ const defaultState = (): CompanionQuizState => {
   return {
     name: undefined,
     nameInputted: false,
+    menuOpen: false,
     milestoneMatrix: {
       'SELF': {
         '0': 0,
@@ -93,7 +98,10 @@ class CompanionQuizApp extends React.Component<Props, CompanionQuizState> {
         `}</style>
 
 
-        <Header menuOpen={null}/>
+        <Header
+          pathname={this.props.pathname}
+          menuOpen={this.state.menuOpen}
+          hamburgerClick={this.handleHamburgerMenuClick.bind(this)}/>
 
         <CompanionQuiz
           tracks={tracks}
@@ -112,6 +120,12 @@ class CompanionQuizApp extends React.Component<Props, CompanionQuizState> {
         </div>
       </main>
     )
+  }
+
+  handleHamburgerMenuClick() {
+    this.setState({
+      menuOpen : !this.state.menuOpen
+    })
   }
 
   // not sure why this is throwing a controlled component error... ?
@@ -138,7 +152,7 @@ class CompanionQuizApp extends React.Component<Props, CompanionQuizState> {
     const values = trackIds.map((trackId) => {
       return this.state.milestoneByTrack[trackId]
     })
-    return { pathname: '/', query: { answerValues: values.join(''), name: this.state.name} }
+    return { pathname: '/results', query: { answerValues: values.join(''), name: this.state.name} }
   }
 
   // I want a method to be able to toggle quiz content after a name has been inputted

@@ -29,7 +29,7 @@ function TrackTile(props) {
             fontSize:'50px',
             textAlign: 'center'
             }}>
-            {props.milestoneByTrack[props.trackId] + 1}
+            {props.milestoneByTrack[props.trackId]}
           </h1>
         </div>
       </div>

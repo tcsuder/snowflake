@@ -1,9 +1,9 @@
-import SnowflakeApp from '../components/SnowflakeApp'
+import AppWelcome from '../components/AppWelcome'
 
-export default ({ url: { query: { name, answerValues} } }) => {
+export default ({url: { pathname }}) => {
   return (
-    <SnowflakeApp
-        name={name}
-        answerValues={answerValues} />
+    <div>
+      <AppWelcome pathname={pathname} />
+    </div>
   )
 }

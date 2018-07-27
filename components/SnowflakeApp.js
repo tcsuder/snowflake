@@ -37,12 +37,12 @@ const defaultState = (): SnowflakeAppState => {
     name: 'Results Not Found',
     title: '',
     milestoneByTrack: {
-      'SELF': undefined,
-      'TEAM': undefined,
-      'PEERS': undefined,
-      'SUPERIORS': undefined,
-      'BUSINESS': undefined,
-      'WORK/LIFE': undefined
+      'SELF': 0,
+      'TEAM': 0,
+      'PEERS': 0,
+      'SUPERIORS': 0,
+      'BUSINESS': 0,
+      'WORK/LIFE': 0
     },
     focusedTrackId: 'SELF'
   }
@@ -93,6 +93,7 @@ class SnowflakeApp extends React.Component<Props, SnowflakeAppState> {
           }
         `}</style>
         <Header
+          pathname={this.props.pathname}
           menuOpen={this.state.menuOpen}
           hamburgerClick={this.handleHamburgerMenuClick.bind(this)}/>
         <div style={{display: 'flex',

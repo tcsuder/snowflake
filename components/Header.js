@@ -87,8 +87,15 @@ function Header(props: Props) {
 					textAlign:'right',
 					marginLeft:'-40px'}}>
 
-					<Link Link href={{ pathname: '/quiz' }}><li className='navOption'>Take Quiz</li></Link>
-					<li className='navOption'>Print Results</li>
+					{
+						props.pathname === '/quiz' && props.menuOpen
+						?
+						<li style={{color: '#ccc', cursor: 'auto'}} className='navOption'>Start Quiz</li>
+						:
+						<Link href={{ pathname: '/quiz' }}><li className='navOption'>Start Quiz</li></Link>
+					}
+
+					<Link href={{ pathname: '/' }}><li className='navOption'>About</li></Link>
 				</div>
 			</ul>
       <div className='titleContainer' style={styles.titleContainer}>
